@@ -1,9 +1,0 @@
-# A comment, this is so you can read your program later.
-# Anything after the # is ignored by ruby
-
-puts "I could have code like this." #and the coments after is ignored
-
-#you can also use a coment to "disable" or comment out a piece of code:
-#puts "This wont run."
-
-puts "This will run."

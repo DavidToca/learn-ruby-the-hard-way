@@ -20,6 +20,9 @@ def cyan(word)
   "\e[36m#{word}\e[0m"
 end
 
+#info of user
+@name = '???'
+
 def start
 #puts "ta tatata " * 5
 
@@ -128,26 +131,40 @@ charizard_image=<<IMAGE
 
 IMAGE
 
+#clear the screen
+system("clear")
+
+
 print yellow(pokemon_logo)
 
-oak_say 'Hello there! Welcome to the world of pokémon! My name is Oak! People call me the pokémon Prof! This world is inhabited by creatures called pokémon! For some people, pokémon are pets. Others use them for fights. Myself...I study pokémon as a profession.'
 
-oak_say('First, what is your name?')
 
-name = get_response
 
-name_confirmation = oak_ask_y_n "so, your name is #{name}?"
+oak_say 'Hello there!, Welcome to the world of pokémon!', true
+
+oak_say 'My name is Oak!, People call me the pokémon Prof!.' ,true
+
+oak_say 'This world is inhabited by creatures called pokémon!',true
+
+oak_say 'For some people, pokémon are pets. Others use them for fights.', true
+
+oak_say 'Myself...I study pokémon as a profession.', true
+
+input_name = oak_ask('First, what is your name?')
+
+name_confirmation = oak_ask_y_n "so, your name is #{red(input_name)}" + "?"
 
 while (not name_confirmation) do
 
-  oak_say('then,  what is your name?')
-  name = get_response
-  
-  name_confirmation = oak_ask_y_n "so, your name is #{name}?"
+  input_name = oak_ask('then,  what is your name?')
+
+  name_confirmation = oak_ask_y_n "so, your name is #{red(input_name)}?"
 
 end
 
-oak_say "Right! So your name is #{name}!"
+oak_say "Right! So your name is #{green(input_name)}!"
+
+@name=input_name
 
 #response = oak_ask('Are you a boy or a girl?')
 
@@ -155,16 +172,28 @@ rival_name = oak_ask 'This is my grandson. He\'s been your rival since you were 
 
 oak_say "That\'s right! I remember now! His name is #{rival_name}!"
 
-oak_say "#{name}! Your very own POKEMON legend is about to unfold! A world of dreams and adventures with POKEMON awaits! Let\'s go!"
+#oak_say " #{green(@name)} ! Your very own POKEMON legend is about to unfold! A world of dreams and adventures with POKEMON awaits! Let\'s go!"a
 
-#print yellow(pikachu_image)
+oak_say "Your very own POKEMON legend is about to unfold! A world of dreams and adventures with POKEMON awaits! Let\'s go!"
 
-#print red(charizard_image)
+#fancy way of said i got nothing else delevop
+
+say "#{yellow('everyone')}","OHHHH NOOOO, HERE COMES CHARIZARD !!! "
+
+say "#{red('charizard')}","GRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+
+print red(charizard_image)
+
+sleep 0.3
+
+system_say 'you die >.<'
+
+quit
 
 end
 
 def get_response
-  prompt = '>'
+  prompt = "[#{cyan(@name)}]:"
 
   print prompt
 
@@ -177,7 +206,7 @@ end
 
 def quit
 
-    system_say 'Bye bye'
+    system_say 'Bye bye!'
 
 
     Process.exit 0
@@ -199,7 +228,7 @@ def oak_ask_y_n(ask)
     response = get_response
     
     quit if response == 'quit'
-    
+
     he_answer = (not response.empty? and response.size == 1 and (response.match(/Y/) or response.match(/N/)))
 
 
@@ -212,19 +241,32 @@ def system_say(message)
   me = "SYSTEM"
   red_me = red(me)
   yellow_message = yellow(message)
-  puts say( red_me , yellow_message )
+  say( red_me , yellow_message )
 end
 
 
-def oak_say(message)
+def oak_say(message, hit_next =false )
   me = "Professor Oak"
   green_me=green(me)
   cyan_message=cyan(message)
-  puts say( green_me, cyan_message)
+  say( green_me, cyan_message,hit_next)
+
 end
 
-def say(person,message)
-  "[#{person}]:#{message}"
+def say(person,message,hit_next = false)
+#  "}]:#{message}"
+  print "[#{person}]:"
+  message.each_char {|c| print c; sleep (c == ',' ? 0.3 : 0.04)}
+ # sleep 0.3
+
+#  if hit_next
+#    gets if hit_next
+  #else
+    sleep 0.3
+    print "\n"
+ # end
+  
+
 end
 
 start

@@ -140,7 +140,7 @@ name_confirmation = oak_ask_y_n "so, your name is #{name}?"
 
 while (not name_confirmation) do
 
-n  oak_say('then,  what is your name?')
+  oak_say('then,  what is your name?')
   name = get_response
   
   name_confirmation = oak_ask_y_n "so, your name is #{name}?"

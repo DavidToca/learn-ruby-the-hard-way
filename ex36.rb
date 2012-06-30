@@ -1,5 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 
+#INFO: I keep delevopment this at https://github.com/DavidToca/pokemon-game-cli
+
+
 def green(word)
   "\e[32m#{word}\e[0m"
 end

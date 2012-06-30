@@ -20,8 +20,17 @@ def cyan(word)
   "\e[36m#{word}\e[0m"
 end
 
+
+
 #info of user
 @name = '???'
+#info of 
+
+MAC = 1
+WINDOWS = 2
+LINUX = 3
+
+@OS = nil
 
 def start
 #puts "ta tatata " * 5
@@ -134,21 +143,32 @@ IMAGE
 #clear the screen
 system("clear")
 
+@os = get_os
+
+system('say -v Zarvox "po ke mon"') if @os == MAC
 
 print yellow(pokemon_logo)
 
 
-
-
 oak_say 'Hello there!, Welcome to the world of pokémon!', true
+
+#  system("say -v Junior  -r 200 'Hello there, #{'Welcome to the world of pokémon'.encode('UTF-8')}'") if @os == MAC
 
 oak_say 'My name is Oak!, People call me the pokémon Prof!.' ,true
 
+#system("say -v Junior  -r 200 'My name is Oak!, People call me the pokemon Prof!.'") if  @os == MAC
+
 oak_say 'This world is inhabited by creatures called pokémon!',true
+
+#system("say -v Junior  -r 200 'This world is inhabited by creatures called pokemon!'}") if @os == MAC
 
 oak_say 'For some people, pokémon are pets. Others use them for fights.', true
 
+#system("say -v Junior  -r 200 'For some people, pokemon are pets. Others use them for fights.'") if @os == MAC
+
 oak_say 'Myself...I study pokémon as a profession.', true
+
+#system("say -v Junior  -r 200 'Myself...I study pokemon as a profession.'") if @os == MAC
 
 input_name = oak_ask('First, what is your name?')
 
@@ -176,17 +196,24 @@ oak_say "That\'s right! I remember now! His name is #{rival_name}!"
 
 oak_say "Your very own POKEMON legend is about to unfold! A world of dreams and adventures with POKEMON awaits! Let\'s go!"
 
-#fancy way of said i got nothing else delevop
+#fancy way of said i got nothing else yet
 
-say "#{yellow('everyone')}","OHHHH NOOOO, HERE COMES CHARIZARD !!! "
+say "#{yellow('everyone')}","OHHHH NOOOO,HERE COMES CHARIZARD !!! "
 
 say "#{red('charizard')}","GRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
 
-print red(charizard_image)
+system("clear") if @ios != WINDOWS
+
+system("cls") if @ios == WINDOWS
+
+
+print red(charizard_image.encode('UTF-8'))
 
 sleep 0.3
 
-system_say 'you die >.<'
+system_say 'you die >.<' 
+
+system('say -v  "Bad News" "pa papapa pa paaaa"') if @os == MAC
 
 quit
 
@@ -202,6 +229,18 @@ def get_response
   quit if response == 'quit'
 
   response
+end
+
+def get_os
+  
+  if RUBY_PLATFORM.match(/.darwin./).size > 0
+    return MAC
+  elsif RUBY_PLATFORM.match(/.mswin./).size > 0
+    return WINDOWS
+  else
+    return LINUX
+ end
+
 end
 
 def quit
@@ -251,12 +290,19 @@ def oak_say(message, hit_next =false )
   cyan_message=cyan(message)
   say( green_me, cyan_message,hit_next)
 
+
+
 end
 
 def say(person,message,hit_next = false)
-#  "}]:#{message}"
+
   print "[#{person}]:"
+
+#  system("say #{message}") if @os == MAC
+
   message.each_char {|c| print c; sleep (c == ',' ? 0.3 : 0.04)}
+
+#  system("say -v Junior  -r 200 'Hello there, #{message.encode('UTF-8')}'") if hit_next
  # sleep 0.3
 
 #  if hit_next
@@ -270,3 +316,6 @@ def say(person,message,hit_next = false)
 end
 
 start
+
+
+

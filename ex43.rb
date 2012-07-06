@@ -10,6 +10,7 @@ class Game
   end
 
   def prompt
+
     print ">"
   end
 

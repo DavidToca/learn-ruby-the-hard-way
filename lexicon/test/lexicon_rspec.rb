@@ -4,7 +4,7 @@ describe LexiconScan do
 
   before :all do
     @lexicon = LexiconScan.new
-    Pair = LexiconScan::Pair 
+    Pair = LexiconScan::Pair
   end
 
   it "should parse all directions" do
@@ -12,29 +12,29 @@ describe LexiconScan do
       north = Pair.new :direction, 'north'
       south = Pair.new :direction ,'south'
       east = Pair.new :direction ,'east'
-    
+
       all_directions = [north, south, east]
-      
+
       result_scan = @lexicon.scan("north")
 
       result_scan.should == [north]
 
       result_scan = @lexicon.scan("north south east")
-      
+
       result_scan.should == all_directions
 
   end
 
   it "should parse al verbs" do
-    
+
     go  = Pair.new :verb, 'go'
-    
+
     kill = Pair.new :verb, 'kill'
 
     eat = Pair.new :verb, 'eat'
 
     go_kill_eat = [go,kill,eat]
-    
+
     result_scan = @lexicon.scan("go")
 
     result_scan.should == [go]
@@ -100,7 +100,7 @@ describe LexiconScan do
   end
 
   it "should parse to error words that are not in direction, verbs, stop words, nouns and numbers" do
-    
+
     ias  = Pair.new(:error,'IAS')
 
     bear = Pair.new(:noun,'bear')
@@ -108,7 +108,7 @@ describe LexiconScan do
     princess = Pair.new(:noun,'princess')
 
     sentence = [ bear, ias, princess]
-    
+
     result_scan = @lexicon.scan("ASDASDASD")
 
     result_scan.should == [Pair.new(:error, 'ASDASDASD')]
@@ -120,6 +120,20 @@ describe LexiconScan do
   end
 
 
-  
+  it "should parse upper and downcase" do
+
+    north = Pair.new(:direction,'NorTh')
+
+    go = Pair.new(:verb,'gO')
+
+    from = Pair.new(:stop,'FrOM')
+
+    result_scan = @lexicon.scan("NorTh gO FrOM")
+
+    sentence = [north, go, from]
+
+    result_scan.should == sentence
+
+  end
 
 end

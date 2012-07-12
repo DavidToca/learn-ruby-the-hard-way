@@ -1,5 +1,6 @@
 class ParseError < Exception
 
+
 end
 
 class Sentence
@@ -107,7 +108,5 @@ module Parser
       raise ParseError.new("Must start with subject, object or verb not: #{start}")
     end
   end
-
-
 
 end

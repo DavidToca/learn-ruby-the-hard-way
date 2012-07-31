@@ -16,6 +16,8 @@ class MyUnitTest < Test::Unit::TestCase
     @the_bridge = game.the_bridge 
     @the_bridge_death = game.the_bridge_death
     @escape_pod = game.escape_pod
+    @the_end_winner = game.the_end_winner
+    @the_end_loser = game.the_end_loser
   end
 
   def test_room
@@ -78,4 +80,11 @@ There's a door to the north.")
 
   end
 
+  def test_escape_pod
+    
+    assert_equal(@escape_pod.go('2'),@the_end_winner)
+    assert_equal(@escape_pod.go('5'),@the_end_loser)
+
+
+  end
 end

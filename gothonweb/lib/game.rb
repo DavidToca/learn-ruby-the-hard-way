@@ -1,7 +1,7 @@
 class Game
 
   
-  attr_accessor :central_corridor, :laser_weapon_armory, :the_bridge, :escape_pod, :the_end_winner, :the_end_loser, :start
+  attr_accessor :central_corridor, :laser_weapon_armory, :the_bridge, :escape_pod, :the_end_winner, :the_end_loser, :start, :generic_death, :central_corridor_shoot_death, :central_corridor_dodge_death, :the_bridge_death
 
   def initialize
 
@@ -19,6 +19,25 @@ flowing around his hate filled body.  He's blocking the door to the
 Armory and about to pull a weapon to blast you.
 })
 
+@central_corridor_shoot_death = Room.new("death",
+                                   %q{
+Quick on the draw you yank out your blaster and fire it at the Gothon.
+His clown costume is flowing and moving around his body, which throws
+off your aim. Your laser hits his costume but misses him entirely. This
+completely ruins his brand new costume his mother brought him, which
+make him fly into an insane rage and blast you repeatedly in the face until
+you are dead. Then he eats you.
+})
+
+@central_corridor_dodge_death = Room.new("death",
+                                   %q{
+Like a world class boxer you dodge, weave, slip and slide right
+as the Gothon's blaster cranks a laser past your head.
+In the middle of your artful dodge your foot slips and you
+bang your head on the metal wall and pass out.
+you wake up shortly after only to die as the Gothon stomps on
+your head and eats you.
+})
 
 @laser_weapon_armory = Room.new("Laser Weapon Armory",
                                %q{
@@ -53,6 +72,17 @@ weapons out yet, as they see the active bomb under your
 arm and don't want to set it off.
 })
 
+@the_bridge_death = Room.new("death",
+%q{
+In a panic you throw the bomb at the group of Gothons
+and make a leap for the door. Right as you drop it a
+Gothon shoot you right in the back killing you.
+As you die you see another Gothon frantically try to disarm
+the bomb. You die knowing they will probably blow up when
+it goes off.
+}
+
+)
 
 @escape_pod = Room.new("Escape Pod",
 %q{
@@ -102,8 +132,9 @@ into jam jelly.
 @generic_death = Room.new("death", "You died.")
 
 @the_bridge.add_paths({
-    'throw the bomb' => generic_death,
-    'slowly place the bomb' => escape_pod
+    'throw the bomb' => the_bridge_death,
+    'slowly place the bomb' => escape_pod,
+    '*' => the_bridge
                      })
 
 @laser_weapon_armory.add_paths({
@@ -112,8 +143,8 @@ into jam jelly.
                               })
 
 @central_corridor.add_paths({
-    'shoot!' => generic_death,
-    'dodge!'=> generic_death,
+    'shoot!' => central_corridor_shoot_death,
+    'dodge!'=> central_corridor_dodge_death,
     'tell a joke' => laser_weapon_armory
                            })
 

@@ -9,7 +9,12 @@ class Room
   end
 
   def go(direction)
-    @paths[direction]
+
+    if @paths[direction] == nil and @paths.include? '*'
+      @paths['*']
+    else
+      @paths[direction]
+    end
   end
 
   def add_paths(paths)

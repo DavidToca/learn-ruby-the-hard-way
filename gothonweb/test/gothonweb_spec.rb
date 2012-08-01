@@ -18,4 +18,10 @@ describe 'gothonweb' do
     
   end
 
+#  it "should start at central corredor" do
+#    get '/'
+#    last_response.should 
+
+#  end
+
 end
